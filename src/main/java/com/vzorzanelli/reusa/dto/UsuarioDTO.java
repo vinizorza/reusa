@@ -1,10 +1,12 @@
 package com.vzorzanelli.reusa.dto;
 
 import com.vzorzanelli.reusa.entity.GeneroEnum;
+import com.vzorzanelli.reusa.entity.PapelEnum;
 import com.vzorzanelli.reusa.entity.Usuario;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class UsuarioDTO {
 
@@ -14,6 +16,7 @@ public class UsuarioDTO {
     private Date dataNascimento;
     private GeneroEnum genero;
     private String registroClasse;
+    private List<PapelEnum> papeis = new ArrayList<>();
 
     public String getNome() {
         return nome;
@@ -55,6 +58,14 @@ public class UsuarioDTO {
         this.registroClasse = registroClasse;
     }
 
+    public List<PapelEnum> getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(List<PapelEnum> papeis) {
+        this.papeis = papeis;
+    }
+
     public static UsuarioDTO from(Usuario usuario) {
         UsuarioDTO dto = new UsuarioDTO();
         dto.setCpf(usuario.getCpf());
@@ -62,6 +73,11 @@ public class UsuarioDTO {
         dto.setNome(usuario.getNome());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setRegistroClasse(usuario.getRegistroClasse());
+
+        for(PapelEnum papel: usuario.getPapeis()){
+            dto.getPapeis().add(papel);
+        }
+
         return dto;
     }
 
@@ -72,6 +88,11 @@ public class UsuarioDTO {
         entity.setNome(dto.getNome());
         entity.setDataNascimento(dto.getDataNascimento());
         entity.setRegistroClasse(dto.getRegistroClasse());
+
+        for(PapelEnum papel: dto.getPapeis()){
+            entity.getPapeis().add(papel);
+        }
+
         return entity;
     }
 }

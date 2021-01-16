@@ -1,7 +1,10 @@
 package com.vzorzanelli.reusa.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "TUSUARIO")
@@ -15,7 +18,7 @@ public class Usuario {
     @Column(name = "NOME")
     private String nome;
 
-    @Column(name = "CPF", length = 11)
+    @Column(name = "CPF", length = 11, unique = true)
     private String cpf;
 
     @Column(name = "DATA_NASCIMENTO")
@@ -27,6 +30,12 @@ public class Usuario {
 
     @Column(name = "REGISTRO_CLASSE")
     private String registroClasse;
+
+    @ElementCollection(targetClass = PapelEnum.class)
+    @CollectionTable(name = "TUSUARIO_PAPEL", joinColumns = @JoinColumn(name = "USUARIO_ID"))
+    @Column(name = "PAPEL", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Collection<PapelEnum> papeis = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -76,4 +85,11 @@ public class Usuario {
         this.registroClasse = registroClasse;
     }
 
+    public Collection<PapelEnum> getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(Collection<PapelEnum> papeis) {
+        this.papeis = papeis;
+    }
 }
