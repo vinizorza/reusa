@@ -13,13 +13,13 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @RequestMapping(value="/{id}", method= RequestMethod.GET)
-    public UsuarioDTO getMaterial(@PathVariable("id") Long id){
+    public UsuarioDTO getUsuario(@PathVariable("id") Long id){
         return usuarioService.getUsuario(id);
     }
 
     @RequestMapping(method= RequestMethod.PUT)
-    public UsuarioDTO getMaterial(@RequestBody UsuarioDTO usuarioDTO){
-        return usuarioService.save(usuarioDTO);
+    public void saveUsuario(@RequestBody UsuarioDTO usuarioDTO){
+        usuarioService.save(usuarioDTO);
     }
 
 }

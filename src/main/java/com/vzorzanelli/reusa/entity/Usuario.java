@@ -37,6 +37,10 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Collection<PapelEnum> papeis = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "RESPONSAVEL_USUARIO_ID")
+    private Usuario responsavel;
+
     public Long getId() {
         return id;
     }
@@ -91,5 +95,13 @@ public class Usuario {
 
     public void setPapeis(Collection<PapelEnum> papeis) {
         this.papeis = papeis;
+    }
+
+    public Usuario getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(Usuario responsavel) {
+        this.responsavel = responsavel;
     }
 }

@@ -19,8 +19,7 @@ public class UsuarioService {
         return usuario.map(UsuarioDTO::from).orElse(null);
     }
 
-    public UsuarioDTO save(UsuarioDTO usuarioDTO) {
-        Usuario usuario = usuarioRepository.save(UsuarioDTO.from(usuarioDTO));
-        return UsuarioDTO.from(usuario);
+    public void save(UsuarioDTO usuarioDTO) {
+        usuarioRepository.save(UsuarioDTO.from(usuarioDTO));
     }
 }

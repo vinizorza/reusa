@@ -17,6 +17,15 @@ public class UsuarioDTO {
     private GeneroEnum genero;
     private String registroClasse;
     private List<PapelEnum> papeis = new ArrayList<>();
+    private UsuarioDTO responsavel;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -66,13 +75,25 @@ public class UsuarioDTO {
         this.papeis = papeis;
     }
 
+    public UsuarioDTO getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(UsuarioDTO responsavel) {
+        this.responsavel = responsavel;
+    }
+
     public static UsuarioDTO from(Usuario usuario) {
         UsuarioDTO dto = new UsuarioDTO();
+        dto.setId(usuario.getId());
         dto.setCpf(usuario.getCpf());
         dto.setGenero(usuario.getGenero());
         dto.setNome(usuario.getNome());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setRegistroClasse(usuario.getRegistroClasse());
+
+        if(usuario.getResponsavel() != null)
+            dto.setResponsavel(UsuarioDTO.from(usuario.getResponsavel()));
 
         for(PapelEnum papel: usuario.getPapeis()){
             dto.getPapeis().add(papel);
@@ -83,11 +104,15 @@ public class UsuarioDTO {
 
     public static Usuario from(UsuarioDTO dto) {
         Usuario entity = new Usuario();
+        entity.setId(dto.getId());
         entity.setCpf(dto.getCpf());
         entity.setGenero(dto.getGenero());
         entity.setNome(dto.getNome());
         entity.setDataNascimento(dto.getDataNascimento());
         entity.setRegistroClasse(dto.getRegistroClasse());
+
+        if(dto.getResponsavel() != null)
+            entity.setResponsavel(UsuarioDTO.from(dto.getResponsavel()));
 
         for(PapelEnum papel: dto.getPapeis()){
             entity.getPapeis().add(papel);
