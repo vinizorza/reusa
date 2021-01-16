@@ -133,3 +133,10 @@ hs_err_pid*
 ### Java-Web ###
 ## ignoring target file
 target/
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/reusa.iml
+/.idea/vcs.xml
