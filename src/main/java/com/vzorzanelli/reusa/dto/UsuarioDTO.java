@@ -120,4 +120,12 @@ public class UsuarioDTO {
 
         return entity;
     }
+
+    public static List<UsuarioDTO> from(List<Usuario> entities) {
+        List<UsuarioDTO> dtos = new ArrayList<>();
+        for (Usuario entity: entities) {
+            dtos.add(UsuarioDTO.from(entity));
+        }
+        return dtos;
+    }
 }
